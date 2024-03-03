@@ -12,6 +12,11 @@ export default defineConfig({
     postcss: {
       plugins: [tailwind(), autoprefixer()],
     },
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import "@/app/assets/scss/global.scss";`,
+      },
+    },
   },
   plugins: [
     vue(),

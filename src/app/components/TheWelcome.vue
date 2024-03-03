@@ -5,7 +5,7 @@ import ToolingIcon from './icons/IconTooling.vue'
 import EcosystemIcon from './icons/IconEcosystem.vue'
 import CommunityIcon from './icons/IconCommunity.vue'
 import SupportIcon from './icons/IconSupport.vue'
-import { Button } from '@/components/ui/button'
+import { Button } from '@/app/components/ui/button'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -16,12 +16,11 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from '@/components/ui/alert-dialog'
+} from '@/app/components/ui/alert-dialog'
 </script>
 
 <template>
   <div class="text-3xl font-bold underline">
-    hola
     <AlertDialog>
     <AlertDialogTrigger>
       <Button>Click me</Button>

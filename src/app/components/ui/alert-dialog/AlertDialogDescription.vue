@@ -4,7 +4,7 @@ import {
   AlertDialogDescription,
   type AlertDialogDescriptionProps,
 } from 'radix-vue'
-import { cn } from '@/lib/utils'
+import { cn } from '@/app/lib/utils'
 
 const props = defineProps<AlertDialogDescriptionProps & { class?: HTMLAttributes['class'] }>()
 
@@ -23,3 +23,4 @@ const delegatedProps = computed(() => {
     <slot />
   </AlertDialogDescription>
 </template>
+@/app/lib/utils

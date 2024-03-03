@@ -1,8 +1,10 @@
+<!-- eslint-disable vue/multi-word-component-names -->
+<!-- eslint-disable vue/require-default-prop -->
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue'
 import { Primitive, type PrimitiveProps } from 'radix-vue'
 import { type ButtonVariants, buttonVariants } from '.'
-import { cn } from '@/lib/utils'
+import { cn } from '@/app/lib/utils'
 
 interface Props extends PrimitiveProps {
   variant?: ButtonVariants['variant']
@@ -25,3 +27,4 @@ const props = withDefaults(defineProps<Props>(), {
     <slot />
   </Primitive>
 </template>
+@/app/lib/utils

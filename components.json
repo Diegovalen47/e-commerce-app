@@ -4,13 +4,13 @@
   "typescript": true,
   "tailwind": {
     "config": "tailwind.config.js",
-    "css": "src/assets/main.css",
+    "css": "src/app/assets/main.css",
     "baseColor": "gray",
     "cssVariables": true
   },
   "framework": "vite",
   "aliases": {
-    "components": "@/components",
-    "utils": "@/lib/utils"
+    "components": "@/app/components",
+    "utils": "@/app/lib/utils"
   }
 }
