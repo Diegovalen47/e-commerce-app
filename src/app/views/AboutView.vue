@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import LandingLayout from "@/app/layouts/LandingLayout.vue"
+import LandingLayout from '@/app/layouts/LandingLayout.vue'
 
 const emit = defineEmits(['update:layout'])
 emit('update:layout', LandingLayout)
 </script>
-
 
 <template>
   <div>
@@ -12,5 +11,4 @@ emit('update:layout', LandingLayout)
   </div>
 </template>
 
-<style>
-</style>
+<style></style>
