@@ -1,7 +1,11 @@
 <script lang="ts" setup>
-import Toolbar from 'primevue/toolbar'
-import Button from 'primevue/button'
+import shopImgUrl from '@/app/assets/img/shop.webp'
+import InputText from 'primevue/inputtext'
+import Image from 'primevue/image'
 import Avatar from 'primevue/avatar'
+import InputGroup from 'primevue/inputgroup'
+import InputGroupAddon from 'primevue/inputgroupaddon'
+
 // import { RouterLink } from 'vue-router'
 import { useProductStore } from '../stores/product'
 
@@ -15,34 +19,62 @@ onMounted(async () => {
 </script>
 
 <template>
-  <Toolbar style="border-radius: 3rem; padding: 1rem 1rem 1rem 1.5rem">
-    <template #start>
-      <div class="flex align-items-center gap-2">
-        <Button label="Files" text plain />
-        <Button label="Edit" text plain />
-        <Button label="View" text plain />
-      </div>
-    </template>
-
-    <template #end>
-      <div class="flex align-items-center gap-2">
-        <Button label="Share" severity="contrast" size="small" />
-        <Avatar
-          image="https://primefaces.org/cdn/primevue/images/avatar/amyelsner.png"
-          style="width: 32px; height: 32px"
+  <div class="w-screen flex justify-content-center" style="background-color: var(--blue-400)">
+    <div id="navbar-grid" style="max-width: 1200px; width: 1200px; padding: 8px 10px 12px 10px">
+      <div style="grid-area: nav-left-top">
+        <Image
+          :src="shopImgUrl"
+          alt="Image"
+          width="40"
+          style="mix-blend-mode: multiply"
+          class="flex justify-content-center align-items-center"
         />
       </div>
-    </template>
-  </Toolbar>
-  <pre>
-    {{ products }}
-  </pre>
-  <!-- <div class="wrapper">
-    <nav>
-      <RouterLink to="/">Home</RouterLink>
-      <RouterLink to="/about">About</RouterLink>
-    </nav>
-  </div> -->
+      <div style="grid-area: nav-center-top">
+        <InputGroup>
+          <InputText placeholder="Search" />
+          <InputGroupAddon><i class="pi pi-search" /></InputGroupAddon>
+        </InputGroup>
+      </div>
+      <div style="grid-area: nav-right-top" class="flex align-items-center gap-2">
+        <Avatar label="V" size="normal" shape="circle" />
+        <span class="hidden sm:block" style="color: var(--teal-50)">Valentin</span>
+      </div>
+      <nav
+        style="grid-area: nav-center-bottom"
+        class="flex align-items-center justify-content-between px-2"
+      >
+        <RouterLink to="/">Home</RouterLink>
+        <div class="relative">
+          <i class="pi pi-shopping-cart" style="color: var(--teal-50); font-size: 1.5rem" />
+          <span
+            class="bg-red-500 text-white border-circle px-1"
+            style="
+              font-size: 0.6rem;
+              position: absolute;
+              top: -5px;
+              right: -5px;
+              border: 2px solid var(--blue-400);
+            "
+          >
+            {{ 5 }}
+          </span>
+        </div>
+      </nav>
+    </div>
+  </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+#navbar-grid {
+  display: grid;
+  grid-template-areas:
+    'nav-left-top nav-center-top nav-right-top'
+    'nav-left-bottom nav-center-bottom nav-right-bottom';
+  grid-template-columns: min-content auto min-content;
+  grid-template-rows: 40px 28px;
+  row-gap: 12px;
+  column-gap: 12px;
+  align-items: center;
+}
+</style>

@@ -1,4 +1,4 @@
-import type ProductRepository from '@/domain/respositories/product_repository'
+import type ProductRepository from '@/domain/repositories/product_repository'
 import { fetchAllProducts } from '../services/product'
 import ProductModel from '../models/product_model'
 

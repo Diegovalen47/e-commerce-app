@@ -1,0 +1,9 @@
+body {
+  margin: 0;
+}
+
+a:-webkit-any-link {
+  color: var(--teal-50);
+  cursor: pointer;
+  text-decoration: none;
+}

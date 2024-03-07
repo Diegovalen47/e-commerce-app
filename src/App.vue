@@ -10,3 +10,7 @@ const layout = shallowRef('div')
     <RouterView @update:layout="layout = $event" />
   </component>
 </template>
+
+<style lang="scss">
+@import './app/assets/scss/global.scss';
+</style>
