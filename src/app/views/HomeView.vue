@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import DefaultLayout from '@/app/layouts/DefaultLayout.vue'
-import ProductsList from '@/app/components/Home/ProductsList.vue'
+import ProductList from '@/app/components/Home/ProductList.vue'
 import LoaderPlaceholder from '@/app/components/Shared/LoaderPlaceholder.vue'
 
 const emit = defineEmits(['update:layout'])
@@ -16,7 +16,7 @@ emit('update:layout', DefaultLayout)
       <div class="col-3">filtros</div>
       <div class="col-9">
         <Suspense>
-          <ProductsList />
+          <ProductList />
           <template #fallback>
             <div class="flex flex-column gap-1">
               <LoaderPlaceholder
