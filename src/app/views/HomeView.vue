@@ -11,7 +11,7 @@ emit('update:layout', DefaultLayout)
   <div class="w-screen flex justify-content-center" style="background-color: var(--blue-50)">
     <div id="main-container" class="grid grid-nogutter">
       <div class="col-12">
-        <h2>Resultados Para:</h2>
+        <h1>Resultados Para:</h1>
       </div>
       <div class="col-3">filtros</div>
       <div class="col-9">

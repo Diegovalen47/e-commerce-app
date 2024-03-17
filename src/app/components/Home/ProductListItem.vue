@@ -24,12 +24,13 @@ const borderRadius = computed(() => {
     <div style="width: 18%">
       <img :src="product.thumbnail" alt="product.name" />
     </div>
-    <div class="flex flex-column gap-1" style="width: 82%">
-      <h3>{{ product.title }}</h3>
-      <p>{{ product.description }}</p>
-      <div class="flex justify-content-between">
-        <p>{{ product.price }}</p>
-        <p>{{ product.rating }}</p>
+    <div class="flex flex-column justify-content-between" style="width: 82%">
+      <div>
+        <span style="text-transform: capitalize">{{ product.description }}</span>
+      </div>
+      <div class="flex flex-column gap-1">
+        <span></span>
+        <span></span>
       </div>
     </div>
   </div>
