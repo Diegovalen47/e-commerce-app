@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 
 import { mount } from '@vue/test-utils'
-import TheHeader from '@/app/components/TheHeader.vue'
+import TheHeader from '@/app/components/Base/TheHeader.vue'
 import PrimeVue from 'primevue/config'
 import router from '@/app/router'
 
