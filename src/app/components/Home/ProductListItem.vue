@@ -8,6 +8,10 @@ const props = defineProps<{
   isLast: boolean
 }>()
 
+const discountedPrice = computed(() => {
+  return props.product.price * (1 - props.product.discountPercentage / 100)
+})
+
 const borderRadius = computed(() => {
   if (props.idx === 0) {
     return '16px 16px 0 0'
@@ -25,12 +29,10 @@ const borderRadius = computed(() => {
       <img :src="product.thumbnail" alt="product.name" />
     </div>
     <div class="flex flex-column justify-content-between" style="width: 82%">
-      <div>
-        <span style="text-transform: capitalize">{{ product.description }}</span>
-      </div>
+      <h5 class="bold-300" style="text-transform: capitalize">{{ product.description }}</h5>
       <div class="flex flex-column gap-1">
-        <span></span>
-        <span></span>
+        <small>{{ product.price.toFixed(2) }}</small>
+        <h5>{{ discountedPrice.toFixed(2) }}</h5>
       </div>
     </div>
   </div>
