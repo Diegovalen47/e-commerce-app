@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import DefaultLayout from '@/app/layouts/DefaultLayout.vue'
 import ProductList from '@/app/components/Home/ProductList.vue'
+import ProductListItemLoader from '@/app/components/Home/ProductListItemLoader.vue'
 import LoaderPlaceholder from '@/app/components/Shared/LoaderPlaceholder.vue'
 
 const emit = defineEmits(['update:layout'])
@@ -19,13 +20,7 @@ emit('update:layout', DefaultLayout)
           <ProductList />
           <template #fallback>
             <div class="flex flex-column gap-1">
-              <LoaderPlaceholder
-                v-for="n in 7"
-                :key="n"
-                height="200px"
-                width="100%"
-                border-radius="8px"
-              />
+              <ProductListItemLoader v-for="n in 7" :key="n" :idx="n" :is-last="n === 6" />
             </div>
           </template>
         </Suspense>

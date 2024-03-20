@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { currencyFormatter } from '@/config/currencyFormatter'
 import type ProductModel from '@/infrastructure/models/product_model'
 import { computed } from 'vue'
 
@@ -25,14 +26,40 @@ const borderRadius = computed(() => {
 
 <template>
   <div class="flex gap-4 product-card">
-    <div style="width: 18%">
-      <img :src="product.thumbnail" alt="product.name" />
-    </div>
-    <div class="flex flex-column justify-content-between" style="width: 82%">
-      <h5 class="bold-300" style="text-transform: capitalize">{{ product.description }}</h5>
+    <img :src="product.thumbnail" :alt="product.title" />
+    <div class="flex flex-column justify-content-between flex-grow-1 py-3" style="height: 100%">
+      <div style="text-transform: capitalize">
+        <h6 style="display: inline" class="bold-500">{{ product.title }}:</h6>
+        <span>{{ ' ' }}</span>
+        <h6 style="display: inline" class="bold-300">
+          {{ product.description }}
+        </h6>
+      </div>
       <div class="flex flex-column gap-1">
-        <small>{{ product.price.toFixed(2) }}</small>
-        <h5>{{ discountedPrice.toFixed(2) }}</h5>
+        <small
+          v-if="product.discountPercentage > 0"
+          style="text-decoration: line-through; opacity: 0.5"
+        >
+          {{ currencyFormatter(product.price) }} USD
+        </small>
+        <div class="flex align-items-center gap-1">
+          <h5>{{ currencyFormatter(discountedPrice) }} USD</h5>
+          <small v-if="product.discountPercentage > 0" style="color: var(--blue-400)">
+            {{ product.discountPercentage.toFixed(1) }}% OFF
+          </small>
+        </div>
+      </div>
+      <div class="flex justify-content-end">
+        <div class="flex align-content-center gap-2">
+          <h6>{{ product.rating.toFixed(1) }}</h6>
+          <div class="flex gap-1">
+            <i
+              v-for="i in 5"
+              :key="i"
+              :class="`pi pi-star${product.rating >= i ? '-fill' : ''}`"
+            ></i>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -42,11 +69,11 @@ const borderRadius = computed(() => {
 .product-card {
   padding: 16px;
   max-height: 200px;
+  height: 200px;
   border-radius: v-bind(borderRadius);
   border: 1px solid var(--gray-200);
   background-color: var(--white);
   align-items: center;
-  justify-content: space-between;
 
   &:hover {
     box-shadow: 0 0 10px 0 var(--gray-200);
@@ -54,7 +81,7 @@ const borderRadius = computed(() => {
   }
 
   img {
-    width: 100%;
+    height: 100%;
     aspect-ratio: 1 / 1;
     border: 1px solid var(--gray-200);
     object-fit: cover;
