@@ -51,7 +51,7 @@ const borderRadius = computed(() => {
       </div>
       <div class="flex justify-content-end">
         <div class="flex align-content-center gap-2">
-          <h6>{{ product.rating.toFixed(1) }}</h6>
+          <h6>{{ product.rating.toFixed(2) }}</h6>
           <div class="flex gap-1">
             <i
               v-for="i in 5"

@@ -1,10 +1,8 @@
 <script lang="ts" setup>
 import { useProductStore } from '@/app/stores/product'
-import ProductListItem from '@/app/components/Home/ProductListItem.vue'
+import ProductListItem from '@/app/components/Products/ProductListItem.vue'
 
 const productStore = useProductStore()
-
-await productStore.fetchAllProducts()
 </script>
 
 <template>

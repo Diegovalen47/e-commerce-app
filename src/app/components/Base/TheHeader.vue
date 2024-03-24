@@ -1,15 +1,36 @@
 <script lang="ts" setup>
 import TheHeaderBrandImage from '@/app/components/Base/TheHeaderBrandImage.vue'
-import TheHeaderSearchInput from '@/app/components/Base/TheHeaderSearchInput.vue'
+import SearchInput from '@/app/components/Shared/SearchInput.vue'
 import TheHeaderProfileAvatar from '@/app/components/Base/TheHeaderProfileAvatar.vue'
 import TheHeaderNavBar from '@/app/components/Base/TheHeaderNavBar.vue'
+import { useProductStore } from '@/app/stores/product'
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+const productStore = useProductStore()
+
+const query = ref<string>('')
+const loading = ref<boolean>(false)
+
+const searchQuery = async () => {
+  loading.value = true
+  await productStore.searchProducts(query.value)
+  loading.value = false
+  router.push('/products')
+}
 </script>
 
 <template>
   <div class="w-screen flex justify-content-center" style="background-color: var(--blue-400)">
     <div id="navbar-grid">
       <TheHeaderBrandImage style="grid-area: nav-left-top" />
-      <TheHeaderSearchInput style="grid-area: nav-center-top" />
+      <SearchInput
+        v-model="query"
+        :disabled="loading"
+        :on-click-action="searchQuery"
+        style="grid-area: nav-center-top"
+      />
       <TheHeaderProfileAvatar style="grid-area: nav-right-top" />
       <TheHeaderNavBar style="grid-area: nav-center-bottom" />
     </div>

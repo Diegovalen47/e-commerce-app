@@ -3,9 +3,27 @@ import { defineStore } from 'pinia'
 import type ProductModel from '@/infrastructure/models/product_model'
 import ProductRepositoryImpl from '@/infrastructure/repositories/product_repository_impl'
 
+export const useProductsPrivateStore = defineStore('productsPrivate', () => {
+  // Data Sources
+  const productRepository = ref<ProductRepositoryImpl>(new ProductRepositoryImpl())
+
+  // State
+  const products = ref<ProductModel[]>([])
+
+  const setProducts = (newProducts: ProductModel[]) => {
+    products.value = newProducts
+  }
+
+  return {
+    productRepository,
+    products,
+    setProducts
+  }
+})
+
 export const useProductStore = defineStore('product', () => {
   // Data Sources
-  const _productRepository = ref<ProductRepositoryImpl>(new ProductRepositoryImpl())
+  const productRepository = ref<ProductRepositoryImpl>(new ProductRepositoryImpl())
 
   // State
   const products = ref<ProductModel[]>([])
@@ -17,12 +35,19 @@ export const useProductStore = defineStore('product', () => {
 
   // Actions
   const fetchAllProducts = async () => {
-    const result = await _productRepository.value.getAllProducts()
+    const result = await productRepository.value.getAllProducts()
+    products.value = result
+  }
+  const searchProducts = async (query: string) => {
+    const result = await productRepository.value.searchProducts(query)
     products.value = result
   }
 
   return {
+    productRepository,
+    products,
     productsOrderedByRating,
-    fetchAllProducts
+    fetchAllProducts,
+    searchProducts
   }
 })
