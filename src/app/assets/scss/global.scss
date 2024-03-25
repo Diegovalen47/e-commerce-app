@@ -11,15 +11,10 @@ a:-webkit-any-link {
   }
 }
 
-h1, h2, h3, h4, h5, h6, p, small, span {
+h1, h2, h3, h4, h5, h6 {
   all: unset;
   line-height: 1;
   display: block;
-}
-
-p, small, span {
-  all: unset;
-  line-height: 1;
 }
 
 h1 {
@@ -45,18 +40,6 @@ h5 {
 h6 {
   font-size: 1.1rem;
 }
-
-p {
-  font-size: 1rem;
-}
-
-small {
-  font-size: 0.8rem;
-}
-span {
-  font-size: 0.9rem;
-}
-
 @mixin bold-list {
   @for $i from 1 through 9 {
     .bold-#{$i}00 {

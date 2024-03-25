@@ -9,7 +9,7 @@ emit('update:layout', DefaultLayout)
 <template>
   <div
     class="w-screen flex justify-content-center"
-    style="background-color: var(--blue-50); height: 90vh"
+    style="background-color: var(--blue-50); height: 100%; min-height: 100vh"
   >
     <div id="main-container">
       <SearchSection />
@@ -17,7 +17,7 @@ emit('update:layout', DefaultLayout)
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 #main-container {
   max-width: 1200px;
   width: 1200px;

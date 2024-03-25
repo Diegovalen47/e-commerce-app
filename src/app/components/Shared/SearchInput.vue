@@ -1,18 +1,17 @@
 <script lang="ts" setup>
 import InputGroup from 'primevue/inputgroup'
 import InputText from 'primevue/inputtext'
-import { defineProps } from 'vue'
+import Button from 'primevue/button'
 
 const model = defineModel<string>()
 const { onClickAction } = defineProps<{
   onClickAction: () => void
-  disabled: boolean
 }>()
 </script>
 
 <template>
   <InputGroup>
     <InputText v-model="model" placeholder="Search" />
-    <Button icon="pi pi-search" :disabled="disabled" @click="onClickAction" />
+    <Button label="Buscar" icon="pi pi-search" @click="onClickAction" />
   </InputGroup>
 </template>

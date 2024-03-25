@@ -3,21 +3,22 @@ import TheHeaderBrandImage from '@/app/components/Base/TheHeaderBrandImage.vue'
 import SearchInput from '@/app/components/Shared/SearchInput.vue'
 import TheHeaderProfileAvatar from '@/app/components/Base/TheHeaderProfileAvatar.vue'
 import TheHeaderNavBar from '@/app/components/Base/TheHeaderNavBar.vue'
-import { useProductStore } from '@/app/stores/product'
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 
 const router = useRouter()
-const productStore = useProductStore()
+const route = useRoute()
 
 const query = ref<string>('')
-const loading = ref<boolean>(false)
 
 const searchQuery = async () => {
-  loading.value = true
-  await productStore.searchProducts(query.value)
-  loading.value = false
-  router.push('/products')
+  router.push({
+    path: '/products',
+    query: {
+      ...route.query,
+      search: query.value
+    }
+  })
 }
 </script>
 
@@ -27,7 +28,6 @@ const searchQuery = async () => {
       <TheHeaderBrandImage style="grid-area: nav-left-top" />
       <SearchInput
         v-model="query"
-        :disabled="loading"
         :on-click-action="searchQuery"
         style="grid-area: nav-center-top"
       />
@@ -37,7 +37,7 @@ const searchQuery = async () => {
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 #navbar-grid {
   max-width: 1200px;
   width: 1200px;

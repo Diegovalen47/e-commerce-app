@@ -1,24 +1,25 @@
 <script lang="ts" setup>
 import SearchInput from '@/app/components/Shared/SearchInput.vue'
-import { useProductStore } from '@/app/stores/product'
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 
 const router = useRouter()
-const productStore = useProductStore()
+const route = useRoute()
 
 const query = ref<string>('')
-const loading = ref<boolean>(false)
 
 const searchQuery = async () => {
-  loading.value = true
-  await productStore.searchProducts(query.value)
-  loading.value = false
-  router.push('/products')
+  router.push({
+    path: '/products',
+    query: {
+      ...route.query,
+      search: query.value
+    }
+  })
 }
 </script>
 
 <template>
   <h1 class="bold-500">¿Que producto deseas buscar?</h1>
-  <SearchInput v-model="query" :disabled="loading" :on-click-action="searchQuery" />
+  <SearchInput v-model="query" :on-click-action="searchQuery" />
 </template>
