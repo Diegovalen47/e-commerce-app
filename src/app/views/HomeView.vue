@@ -24,8 +24,9 @@ emit('update:layout', DefaultLayout)
   padding: 10px;
   display: flex;
   gap: 50px;
+  padding-top: 100px;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
 }
 </style>

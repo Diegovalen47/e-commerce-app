@@ -11,7 +11,7 @@ const { onClickAction } = defineProps<{
 
 <template>
   <InputGroup>
-    <InputText v-model="model" placeholder="Search" />
+    <InputText v-model="model" placeholder="Search" @keyup.enter="onClickAction" />
     <Button label="Buscar" icon="pi pi-search" @click="onClickAction" />
   </InputGroup>
 </template>
