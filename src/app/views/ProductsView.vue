@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import DefaultLayout from '@/app/layouts/DefaultLayout.vue'
+import ProductFilter from '@/app/components/Products/ProductFilter.vue'
 import ProductList from '@/app/components/Products/ProductList.vue'
 import { useRoute } from 'vue-router'
 import { computed } from 'vue'
@@ -30,7 +31,9 @@ console.log('query', route.query)
           </h1>
         </div>
       </div>
-      <div class="col-3">filtros</div>
+      <div class="col-3">
+        <ProductFilter />
+      </div>
       <div class="col-9">
         <ProductList />
       </div>
