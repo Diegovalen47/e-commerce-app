@@ -35,7 +35,7 @@ console.log('query', route.query)
         <ProductFilter />
       </div>
       <div class="col-9">
-        <ProductList />
+        <ProductList class="px-3" />
       </div>
     </div>
   </div>

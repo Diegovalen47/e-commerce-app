@@ -31,14 +31,14 @@ onMounted(async () => {
 <template>
   <div v-if="productsStore.productsFetched" class="flex flex-column">
     <ProductListItem
-      v-for="(product, idx) in productsStore.productsOrderedByRating"
+      v-for="(product, idx) in productsStore.productsOrderedBySelected"
       :key="idx"
       :product="product"
       :idx="idx"
-      :is-last="idx === productsStore.productsOrderedByRating.length - 1"
+      :is-last="idx === productsStore.productsOrderedBySelected.length - 1"
     />
     <div
-      v-if="productsStore.productsOrderedByRating.length === 0"
+      v-if="productsStore.productsOrderedBySelected.length === 0"
       class="flex flex-column align-items-center py-8"
     >
       <h1 class="bold-500">No se encontraron productos</h1>

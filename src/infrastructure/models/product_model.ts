@@ -43,3 +43,10 @@ export default class ProductModel implements Product {
     })
   }
 }
+
+export enum ORDER_PRODUCTS_BY {
+  RATING,
+  PRICE,
+  DISCOUNT,
+  NAME
+}
