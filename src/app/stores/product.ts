@@ -4,7 +4,7 @@ import ProductModel from '@/infrastructure/models/product_model'
 import { ORDER_PRODUCTS_BY } from '@/infrastructure/models/product_model'
 import ProductRepositoryImpl from '@/infrastructure/repositories/product_repository_impl'
 
-type FilterObject = {
+type OrderObject = {
   label: string
   value: any
   property:
@@ -14,6 +14,11 @@ type FilterObject = {
     | ProductModel['rating']
 }
 
+export enum Filter {
+  DISCOUNT = 'discountPercentage',
+  RATING = 'rating'
+}
+
 export const useProductStore = defineStore('product', () => {
   // Data Sources
   const productRepository = ref<ProductRepositoryImpl>(new ProductRepositoryImpl())
@@ -21,21 +26,41 @@ export const useProductStore = defineStore('product', () => {
   // State
   const products = ref<ProductModel[]>([])
   const productsFetched = ref<boolean>(false)
-  const orderingOptions = ref<FilterObject[]>([
+  const orderingOptions = ref<OrderObject[]>([
     { label: 'Calificación', value: ORDER_PRODUCTS_BY.RATING, property: 'rating' },
     { label: 'Precio', value: ORDER_PRODUCTS_BY.PRICE, property: 'price' },
-    { label: 'Descuento', value: ORDER_PRODUCTS_BY.DISCOUNT, property: 'discount' }
+    { label: 'Descuento', value: ORDER_PRODUCTS_BY.DISCOUNT, property: 'discountPercentage' }
   ])
   const selectedOrderIndex = ref(0)
   const selectedOrderObject = ref(orderingOptions.value[selectedOrderIndex.value])
+  const filtersApplied = ref<Filter[]>([])
+  const filterDiscountValue = ref<number>(10)
+  const filterRatingValue = ref<number>(1)
 
   // Computed
-  const productsOrderedBySelected = computed(() => {
+  const productsOrderedBySelected = computed<ProductModel[]>(() => {
     return products.value.sort(
       (a, b) =>
         Number(b[selectedOrderObject.value.property as keyof ProductModel]) -
         Number(a[selectedOrderObject.value.property as keyof ProductModel])
     )
+  })
+
+  const filteredProducts = computed<ProductModel[]>(() => {
+    if (filtersApplied.value.length === 0) {
+      return productsOrderedBySelected.value
+    }
+
+    return filtersApplied.value.reduce((acc, selectedFilter) => {
+      return acc.filter((product) => {
+        if (selectedFilter === Filter.DISCOUNT) {
+          return product[selectedFilter] >= filterDiscountValue.value
+        } else if (selectedFilter === Filter.RATING) {
+          return product[selectedFilter] >= filterRatingValue.value
+        }
+        return false
+      })
+    }, productsOrderedBySelected.value)
   })
 
   // Actions
@@ -58,11 +83,15 @@ export const useProductStore = defineStore('product', () => {
 
   return {
     orderingOptions,
+    filterDiscountValue,
+    filterRatingValue,
+    filtersApplied,
     selectedOrderIndex,
     selectedOrderObject,
     productRepository,
     products,
     productsOrderedBySelected,
+    filteredProducts,
     productsFetched,
     fetchAllProducts,
     searchProducts
