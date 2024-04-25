@@ -1,11 +1,14 @@
 <script lang="ts" setup>
 import { RouterLink } from 'vue-router'
+import { useShoppingCartStore } from '@/app/stores/shopping_cart'
+
+const shoppingCartStore = useShoppingCartStore()
 </script>
 
 <template>
   <nav class="flex align-items-center justify-content-between px-2">
     <RouterLink to="/">Home</RouterLink>
-    <div class="relative">
+    <div class="relative" style="cursor: pointer" @click="shoppingCartStore.cartExpanded = true">
       <i class="pi pi-shopping-cart" style="color: var(--teal-50); font-size: 1.5rem" />
       <span
         class="bg-red-500 text-white border-circle px-1"

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import TheHeader from '@/app/components/Base/TheHeader.vue'
+import ThePurchaseCar from '@/app/components/Base/ThePurchaseCar.vue'
 </script>
 
 <template>
@@ -9,6 +10,7 @@ import TheHeader from '@/app/components/Base/TheHeader.vue'
   <main>
     <slot />
   </main>
+  <ThePurchaseCar />
 </template>
 
 <style scoped>
