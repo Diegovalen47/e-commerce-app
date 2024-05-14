@@ -26,6 +26,10 @@ export const useProductStore = defineStore('product', () => {
   // State
   const products = ref<ProductModel[]>([])
   const productsFetched = ref<boolean>(false)
+
+  const productDetail = ref<ProductModel>(ProductModel.EmptyProduct())
+  const productDetailFetched = ref<boolean>(false)
+
   const orderingOptions = ref<OrderObject[]>([
     { label: 'Calificación', value: ORDER_PRODUCTS_BY.RATING, property: 'rating' },
     { label: 'Precio', value: ORDER_PRODUCTS_BY.PRICE, property: 'price' },
@@ -72,6 +76,14 @@ export const useProductStore = defineStore('product', () => {
 
     productsFetched.value = true
   }
+  const fetchProductById = async (id: number) => {
+    productDetailFetched.value = false
+
+    const result = await productRepository.value.getProductById(id)
+    productDetail.value = result
+
+    productDetailFetched.value = true
+  }
   const searchProducts = async (query: string) => {
     productsFetched.value = false
 
@@ -79,6 +91,10 @@ export const useProductStore = defineStore('product', () => {
     products.value = result
 
     productsFetched.value = true
+  }
+  const clearProductDetail = () => {
+    productDetail.value = ProductModel.EmptyProduct()
+    productDetailFetched.value = false
   }
 
   return {
@@ -90,10 +106,14 @@ export const useProductStore = defineStore('product', () => {
     selectedOrderObject,
     productRepository,
     products,
+    productDetail,
     productsOrderedBySelected,
     filteredProducts,
     productsFetched,
+    productDetailFetched,
     fetchAllProducts,
+    fetchProductById,
+    clearProductDetail,
     searchProducts
   }
 })

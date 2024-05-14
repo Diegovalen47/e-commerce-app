@@ -18,3 +18,12 @@ export const searchProducts = async (query: string): Promise<Result<Array<any>, 
     return err(new Error('Error searching products'))
   }
 }
+
+export const fetchProductById = async (id: number): Promise<Result<any, Error>> => {
+  try {
+    const response = await axios.get(`/products/${id.toString()}`)
+    return ok(response.data)
+  } catch (error) {
+    return err(new Error('Error fetching product'))
+  }
+}

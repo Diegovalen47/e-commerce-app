@@ -30,8 +30,8 @@ defineProps({
   }
 }
 .placeholder {
-  height: v-bind(height);
-  width: v-bind(width);
+  height: v-bind(height) !important;
+  width: v-bind(width) !important;
   border-radius: v-bind(borderRadius);
   background-image: linear-gradient(to right, #d6d7d8 0%, #e2e3e4 10%, #d6d7d8 20%, #d6d7d8 100%);
   background-size: 200% 100%;

@@ -10,8 +10,6 @@ emit('update:layout', DefaultLayout)
 
 const route = useRoute()
 const query = computed(() => route.query.search)
-
-console.log('query', route.query)
 </script>
 
 <template>

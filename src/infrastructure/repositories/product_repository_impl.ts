@@ -1,8 +1,22 @@
 import type ProductRepository from '@/domain/repositories/product_repository'
-import { fetchAllProducts, searchProducts } from '../services/product'
+import { fetchAllProducts, fetchProductById, searchProducts } from '../services/product'
 import ProductModel from '../models/product_model'
 
 export default class ProductRepositoryImpl implements ProductRepository {
+  async getProductById(id: number) {
+    const result = await fetchProductById(id)
+
+    return result
+      .mapErr((error) => {
+        console.error(error)
+        return ProductModel.EmptyProduct()
+      })
+      .map((product) => {
+        // This map function is from the neverthrow library
+        return ProductModel.fromJson(product)
+      })
+      .unwrapOr(ProductModel.EmptyProduct())
+  }
   async getAllProducts() {
     const result = await fetchAllProducts()
 

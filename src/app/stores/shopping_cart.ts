@@ -7,7 +7,7 @@ export const useShoppingCartStore = defineStore('cart', () => {
   const productsStore = useProductStore()
 
   // State
-  const cartExpanded = ref<boolean>(true)
+  const cartExpanded = ref<boolean>(false)
 
   return {
     cartExpanded

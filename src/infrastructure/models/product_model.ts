@@ -42,6 +42,22 @@ export default class ProductModel implements Product {
       images: json.images
     })
   }
+
+  static EmptyProduct(): ProductModel {
+    return new this({
+      id: -1,
+      title: '',
+      description: '',
+      price: 0,
+      discountPercentage: 0,
+      rating: 0,
+      stock: 0,
+      brand: '',
+      category: '',
+      thumbnail: '',
+      images: []
+    })
+  }
 }
 
 export enum ORDER_PRODUCTS_BY {

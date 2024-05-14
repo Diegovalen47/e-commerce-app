@@ -1,7 +1,11 @@
 <script lang="ts" setup>
 import { currencyFormatter } from '@/config/currencyFormatter'
 import type ProductModel from '@/infrastructure/models/product_model'
+import { useRouter, useRoute } from 'vue-router'
 import { computed } from 'vue'
+
+const router = useRouter()
+const route = useRoute()
 
 const props = defineProps<{
   product: ProductModel
@@ -22,10 +26,22 @@ const borderRadius = computed(() => {
     return '0'
   }
 })
+
+const goToProductDetail = () => {
+  router.push({
+    name: 'product-detail',
+    params: {
+      id: props.product.id
+    },
+    query: {
+      ...route.query
+    }
+  })
+}
 </script>
 
 <template>
-  <div class="flex gap-4 product-card">
+  <div class="flex gap-4 product-card" @click="goToProductDetail()">
     <img :src="product.thumbnail" :alt="product.title" />
     <div class="flex flex-column justify-content-between flex-grow-1 py-3" style="height: 100%">
       <div style="text-transform: capitalize">
