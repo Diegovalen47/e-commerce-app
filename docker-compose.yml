@@ -1,9 +1,12 @@
 version: "3"
+
 services:
   app:
+    build:
+      context: ./
+      dockerfile: Dockerfile
     image: "e-commerce-app"
     container_name: "e-commerce-server"
-    restart: "always"
     ports:
       - "4173:4173"
     environment:
