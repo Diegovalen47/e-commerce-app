@@ -1,4 +1,4 @@
-import { computed, reactive, ref } from 'vue'
+import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
 import ProductModel from '@/infrastructure/models/product_model'
 import { ORDER_PRODUCTS_BY } from '@/infrastructure/models/product_model'
