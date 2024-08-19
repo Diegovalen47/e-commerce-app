@@ -20,6 +20,6 @@ const searchQuery = async () => {
 </script>
 
 <template>
-  <h1 class="bold-500">¿Que producto deseas buscar?</h1>
+  <h1 class="bold-500">¿Que producto buscas?</h1>
   <SearchInput v-model="query" :on-click-action="searchQuery" />
 </template>
